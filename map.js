@@ -294,6 +294,90 @@ document.addEventListener('DOMContentLoaded', function () {
     if (drawToolBtn) drawToolBtn.addEventListener('click', () => setDrawingMode('draw'));
     if (heartShapeBtn) heartShapeBtn.addEventListener('click', () => setDrawingMode('heart'));
     if (circleShapeBtn) circleShapeBtn.addEventListener('click', () => setDrawingMode('circle'));
+    
+    const snapToRoadBtn = document.getElementById('snap-to-road-btn');
+    if (snapToRoadBtn) {
+        snapToRoadBtn.addEventListener('click', () => {
+            // Placeholder for Snap to Road functionality
+            if (waypoints.length < 2) {
+                alert("Not enough points to snap to road. Please draw a route with at least two waypoints first.");
+                return;
+            }
+
+            const osrmCoords = waypoints.map(wp => `${wp.lng},${wp.lat}`).join(';');
+            const apiUrl = `http://router.project-osrm.org/route/v1/driving/${osrmCoords}?overview=full&geometries=geojson`;
+
+            console.log("Snapping to road... Requesting OSRM API:", apiUrl);
+            snapToRoadBtn.disabled = true; // Disable button during API call
+            snapToRoadBtn.textContent = "Snapping...";
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`OSRM API request failed with status: ${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.code === "Ok" && data.routes && data.routes.length > 0) {
+                        const routeGeometry = data.routes[0].geometry; // GeoJSON LineString
+                        console.log("OSRM route geometry received:", routeGeometry);
+                        
+                        // Store the fetched route for the next step (map update)
+                        // OSRM returns [lng, lat] pairs, Leaflet needs [lat, lng]
+                        window.snappedRouteGeometry = routeGeometry.coordinates.map(coord => L.latLng(coord[1], coord[0]));
+                        
+                        if (window.snappedRouteGeometry && window.snappedRouteGeometry.length > 0) {
+                            clearRoute(); // Clear old route
+                            
+                            waypoints = window.snappedRouteGeometry; // Set new waypoints from snapped data
+                            
+                            // Re-create markers for the new waypoints
+                            // For very dense routes, consider showing only start/end or fewer markers
+                            waypoints.forEach(latLng => {
+                                const marker = L.marker(latLng); // Don't add popups by default for snapped points
+                                waypointMarkers.push(marker); // Add to array for management (e.g., show/hide)
+                                if (showWaypointsCheckbox.checked) {
+                                    marker.addTo(map);
+                                }
+                            });
+
+                            updatePolyline(); // Redraw the polyline with new waypoints
+                            updateRunStats();   // Recalculate stats for the new route
+                            
+                            delete window.snappedRouteGeometry; // Clean up global variable
+                            alert("Route snapped to roads and map updated!");
+                            setDrawingMode('draw'); // Reset to draw mode after successful snap
+                        } else {
+                            // This case should ideally be caught by the data.code !== 'Ok' check if OSRM behaves consistently.
+                            // However, if data.code is 'Ok' but routes array is empty or geometry is bad.
+                            console.warn("OSRM Warning: Route snapping returned Ok, but no valid geometry found.", data);
+                            throw new Error("Snapped route geometry is empty or invalid, even though OSRM reported 'Ok'.");
+                        }
+                    } else if (data.code !== "Ok") { // More specific error handling based on OSRM response code
+                        console.error("OSRM API Error:", data);
+                        throw new Error(`OSRM API Error: ${data.code}. ${data.message || 'No specific message provided by OSRM.'}`);
+                    } else { // Fallback for unexpected structure but 'Ok' code.
+                        console.error("OSRM API Error: Unexpected response structure.", data);
+                        throw new Error("Unexpected response from OSRM API after snapping.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error during Snap to Road process:", error); // Log the full error object for debugging
+                    // Provide a more user-friendly message for common fetch errors, otherwise show error.message
+                    if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError")) {
+                        alert("Network error: Could not connect to the routing service. Please check your internet connection.");
+                    } else {
+                        alert(`Error snapping to road: ${error.message}`);
+                    }
+                })
+                .finally(() => {
+                    snapToRoadBtn.disabled = false; // Re-enable button
+                    snapToRoadBtn.textContent = "Snap to Road";
+                });
+        });
+    }
+
     if (clearRouteBtn) {
         clearRouteBtn.addEventListener('click', () => {
             clearRoute();
