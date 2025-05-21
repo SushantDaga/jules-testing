@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Route - FakeMyRun</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html"><img src="logo.png" alt="FakeMyRun Logo" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="how-to-upload.html">How To Upload</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Create Your Custom Route</h1>
+
+        <section id="draw-route">
+            <h2>Draw Your Route</h2>
+            <div id="map" style="width:100%; height:400px;">
+                <!-- Map will be initialized here -->
+            </div>
+            <div class="drawing-tools">
+                <input type="text" id="location-search" placeholder="Search for a location...">
+                <button id="location-search-btn" class="button-secondary" style="flex-grow: 0;">Search</button>
+                <button id="draw-tool-btn" class="button-secondary">Draw Tool</button>
+                <button id="heart-shape-btn" class="button-secondary">Heart Shape</button>
+                <button id="circle-shape-btn" class="button-secondary">Circle Shape</button>
+                <label for="show-waypoints">
+                    <input type="checkbox" id="show-waypoints" name="show-waypoints" checked>
+                    Show Waypoints
+                </label>
+                <button id="clear-route-btn" class="button-secondary" style="flex-grow: 0; margin-left: auto;">Clear Route</button>
+            </div>
+        </section>
+
+        <section id="run-details">
+            <h2>Run Details</h2>
+            <form>
+                <div class="form-group">
+                    <label for="activity-type">Activity Type:</label>
+                    <select id="activity-type" name="activity-type">
+                        <option value="run">Run</option>
+                        <option value="bike">Bike</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pace-unit">Pace Unit:</label>
+                    <select id="pace-unit" name="pace-unit">
+                        <option value="min/km">min/km</option>
+                        <option value="min/mile">min/mile</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pace-input">Pace (min/km):</label>
+                    <input type="number" id="pace-input" name="pace-input" value="6" min="1"> <span class="input-unit">min/km</span>
+                </div>
+                <div class="form-group">
+                    <label for="run-name">Run Name:</label>
+                    <input type="text" id="run-name" name="run-name" placeholder="e.g., Morning Jog">
+                </div>
+                <div class="form-group">
+                    <label for="run-date">Date:</label>
+                    <input type="date" id="run-date" name="run-date">
+                </div>
+                <div class="form-group">
+                    <label for="start-time">Start Time:</label>
+                    <input type="time" id="start-time" name="start-time">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="3" placeholder="e.g., Nice run along the river"></textarea>
+                </div>
+            </form>
+        </section>
+
+        <section id="run-stats">
+            <h2>Run Stats</h2>
+            <div class="stats-grid">
+                <div><strong>Distance:</strong> <span id="stat-distance">10.0 km</span></div>
+                <div><strong>Duration:</strong> <span id="stat-duration">01:00:00</span></div>
+                <div><strong>Elevation Gain:</strong> <span id="stat-elevation">150 m</span></div>
+                <div><strong>Pace:</strong> <span id="stat-pace">6:00 min/km</span></div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <button class="button" id="download-gpx-btn">Download Run File (X Tokens)</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 FakeMyRun. All rights reserved.</p>
+            <ul>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="how-to-upload.html">How To Upload</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="map.js"></script>
+</body>
+</html>

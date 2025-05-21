@@ -1,0 +1,461 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    border-bottom: #007bff 3px solid;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    height: 50px; /* Adjust as needed */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+header nav li {
+    margin-left: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+header nav a:hover, header nav a.button:hover {
+    color: #007bff;
+}
+
+/* Navigation Button */
+header nav a.button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+header nav a.button-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
+/* Typography */
+h1, h2, h3 {
+    margin-bottom: 0.75rem;
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button-secondary {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button-secondary:hover {
+    background-color: #545b62;
+}
+
+/* Sections */
+section {
+    padding: 2rem 0;
+}
+
+.hero {
+    background: #f4f4f4;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.video-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.video-section iframe {
+    max-width: 100%;
+    border: 5px solid #ddd;
+    border-radius: 5px;
+}
+
+.how-it-works {
+    background: #fff;
+}
+
+.how-it-works .steps {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.how-it-works .step {
+    flex-basis: 30%;
+    padding: 1rem;
+}
+
+.how-it-works .step h3 {
+    margin-bottom: 0.5rem;
+    color: #007bff;
+}
+
+.learn-more {
+    text-align: center;
+    background: #e9ecef;
+}
+.learn-more a {
+    color: #007bff;
+    text-decoration: none;
+}
+.learn-more a:hover {
+    text-decoration: underline;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    background: #333;
+    color: #fff;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    color: #007bff;
+}
+
+/* Create Page Specifics */
+#map {
+    width: 100%;
+    height: 400px;
+    /* background-color: #e0e0e0; Removed as map should load */
+    /* display: flex; Removed */
+    /* justify-content: center; Removed */
+    /* align-items: center; Removed */
+    /* text-align: center; Removed */
+    margin-bottom: 1.5rem; /* Increased margin */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Added border */
+}
+
+.drawing-tools {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px; /* Spacing between items */
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.drawing-tools input[type="text"]#location-search {
+    flex-grow: 1; /* Takes available space */
+    padding: 0.65rem; /* Match button padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    min-width: 200px; /* Minimum width before wrapping */
+}
+
+.drawing-tools button {
+    margin-right: 0; /* Remove individual margin, rely on gap */
+    transition: background-color 0.2s ease-in-out; /* Smooth transition for active state */
+}
+
+/* Style for the active drawing mode button */
+.drawing-tools button.active-mode {
+    background-color: #0056b3; /* Darker blue, example */
+    color: white;
+    border-color: #004085; /* Even darker border */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Ensure clear route button has distinct styling or similar to others */
+#clear-route-btn {
+    background-color: #dc3545; /* Red color for destructive action */
+    color: white;
+    border-color: #dc3545;
+}
+#clear-route-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+
+.drawing-tools label {
+    margin-left: 5px; /* Reduced margin, rely on gap */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.drawing-tools input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+
+/* Run Details Form Styling */
+#run-details form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form groups */
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow label and input to wrap on small screens */
+    align-items: center;
+    gap: 10px; /* Space between label and input if on same line */
+    margin-bottom: 0; /* Rely on form gap */
+}
+
+.form-group label {
+    flex-basis: 150px; /* Fixed width for labels */
+    margin-bottom: 0; /* Handled by gap */
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    flex-grow: 1; /* Input takes remaining space */
+    padding: 0.65rem; /* Consistent padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 200px; /* Minimum width for inputs */
+}
+
+.form-group textarea {
+    min-height: 60px;
+}
+
+/* Specific styling for pace input if needed, moving from inline */
+#pace-input {
+    width: auto; /* Override general input width if flex-grow is too much */
+    min-width: 60px; /* Original inline style */
+    flex-basis: 70px; /* Allow it to be small */
+    flex-grow: 0; /* Don't let it grow excessively */
+    text-align: right;
+}
+/* Styling for units text next to inputs like Pace */
+.form-group .input-unit {
+    margin-left: 5px; /* Space from the input */
+    white-space: nowrap; /* Prevent wrapping of the unit itself */
+    flex-shrink: 0; /* Prevent unit from shrinking if label/input are too wide */
+}
+
+
+/* Run Stats Display */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stats-grid div {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.stats-grid strong {
+    color: #007bff;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* How To Upload & Terms Page */
+main.container h1 {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+main.container section h2 {
+    color: #007bff;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+main.container ol {
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+main.container ol li {
+    margin-bottom: 0.5rem;
+}
+
+main.container #legal-disclaimer p,
+main.container #terms-text p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+main.container #terms-text h2 {
+    font-size: 1.5rem; /* Slightly smaller than page title for hierarchy */
+    margin-top: 2.5rem;
+}
+main.container #terms-text .conclusion {
+    font-weight: bold;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    padding: 0.5rem 0;
+    background-color: #e9ecef;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb .container a {
+    font-size: 0.9rem;
+}
+
+/* How It Works Page Specifics */
+#how-it-works.container h1, /* Target h1 inside main.container specifically for how-it-works page */
+#how-it-works.container section h2 { /* Target section h2 inside main.container for how-it-works page */
+    /* Styles already defined in main.container section h2 or typography, adjust if needed */
+}
+
+#how-it-works.container article {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#how-it-works.container article h3 {
+    font-size: 1.5rem;
+    color: #333; /* Darker for article titles within sections */
+    margin-bottom: 0.5rem;
+}
+
+/* Remove inline styles from HTML files if they are covered here */
+/* For example, if create.html had inline styles, those should be removed and managed by style.css */
+/* This is just a comment, no actual code to remove from here */
+
+/* Ensure main content area has some top margin if header is fixed, or just general spacing */
+main {
+    padding-top: 1rem; /* Add some space below the header */
+}
